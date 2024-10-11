@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class UserRequest extends FormRequest
 {
@@ -32,7 +34,7 @@ class UserRequest extends FormRequest
     {
         return $this->input($camelCaseKey);
     }
-    
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -77,5 +79,29 @@ class UserRequest extends FormRequest
             'country_code.required' => 'A country code is required.',
             'country_code.size' => 'The country code must be valid 2 characters code.',
         ];
+    }
+
+    // Override failedValidation method to convert snake_case to camelCase
+    protected function failedValidation(Validator $validator)
+    {
+        $errors = $validator->errors()->toArray();
+        $camelCaseErrors = $this->convertToCamelCase($errors);
+
+        throw new HttpResponseException(
+            response()->json(['errors' => $camelCaseErrors], 422)
+        );
+    }
+
+    // Helper method to convert snake_case keys to camelCase
+    private function convertToCamelCase(array $errors)
+    {
+        $camelCaseErrors = [];
+        
+        foreach ($errors as $key => $messages) {
+            $camelCaseKey = lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $key))));
+            $camelCaseErrors[$camelCaseKey] = $messages;
+        }
+        
+        return $camelCaseErrors;
     }
 }

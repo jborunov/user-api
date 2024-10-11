@@ -13,12 +13,12 @@ This project is a simple JSON API built with Laravel to manage user data. The AP
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/yourproject.git
+   git clone https://github.com/jborunov/user-api.git
    ```
 
 2. Navigate into the project directory:
    ```bash
-   cd yourproject
+   cd user-api
    ```
 
 3. Install the dependencies:
@@ -111,5 +111,5 @@ This project is a simple JSON API built with Laravel to manage user data. The AP
 - Include authentification 
 - Store some mathimatical operations (ipAddressSum) results in the DB to avoid using memory
 - Paginations for the users request, to avoid large data bottlenecks
-- Include some Unit testing
+- Include more Unit testing
 - ...
