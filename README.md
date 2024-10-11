@@ -4,6 +4,13 @@ This project is a simple JSON API built with Laravel to manage user data. The AP
 
 ## Installation
 
+### Prerequisites
+
+- **PHP 8.x**
+- **Composer**
+- **Docker** (optional, if you prefer running MySQL in Docker)
+- **MySQL** (if using a local or external MySQL server)
+
 1. Clone the repository:
    ```bash
    git clone https://github.com/yourusername/yourproject.git
@@ -24,10 +31,7 @@ This project is a simple JSON API built with Laravel to manage user data. The AP
    cp .env.example .env
    ```
 
-5. Generate an application key:
-   ```bash
-   php artisan key:generate
-   ```
+5. Update the .env file with your MySQL database credentials
 
 6. Set up your database in the `.env` file and run migrations:
    ```bash
@@ -106,5 +110,6 @@ This project is a simple JSON API built with Laravel to manage user data. The AP
 
 - Include authentification 
 - Store some mathimatical operations (ipAddressSum) results in the DB to avoid using memory
-- Paginations for the result, to avoid large data bottlenecks
+- Paginations for the users request, to avoid large data bottlenecks
+- Include some Unit testing
 - ...
